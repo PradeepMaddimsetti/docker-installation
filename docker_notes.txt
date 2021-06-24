@@ -1,0 +1,226 @@
+Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
+ Containers are isolated from one another and bundle their own software, libraries and configuration files;
+they can communicate with each other through well-defined channels.
+Because all of the containers share the services of a single operating system kernel, 
+
+container technologies like docker, rocket
+ docker has to components
+docker client(input and output)
+docker daemon(service)
+images getting from to locations
+local registry
+remote registry
+
+Container is an isolated area of execution with
+
+storage
+CPU
+RAM
+Process tree
+network interface (ip address)
+
+types of remote registries
+
+Docker Registry
+Docker Hub is Default Registry 
+There are many private docker registries
+AWS Elastic Container Registry (ECR)
+Azure Container Registry (ACR)
+Aritifactory
+Docker registry (Docker Image) 
+and many more
+
+Docker image is a packaging format to run an application on docker engine as a container
+
+What docker image has?
+includes everything to run an application
+code or binaries
+runtime
+dependencies
+other filesystem objects
+
+How can a Docker image be created?
+Converting existing container into docker image
+Export VMs to Docker Image
+Create DockerImage using Dockerfile
+
+while creating a docker image 
+ take the existing image as a base image
+
+
+Docker file is sequence of instructions in the format of
+INSTRUCTION  arguments
+
+FROM
+This instructuion sets the base image
+
+RUN:
+This instruction execute the commands in the created base image container in a new layer
+Run command runs with /bin/bash -c on Linux and cmd on windows
+
+EXAMPLE
+
+RUN wget https://referenceappkhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+
+RUN /bin/bash -c 'echo sample'
+RUN ["/bin/bash", "-c", "echo sample"]
+
+Commands have two forms
+shell =>
+/bin/bash -c 'echo sample'
+java -jar spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+
+exec => represent in square brackets
+["/bin/bash", "-c", "echo sample"]
+["java",  "-jar",  "spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+
+ENTRYPOINT
+This is the command that gets executed when starting the container. if ENTRYPOINT is not found then CMD is executed when starting the container
+Syntax:
+ENTRYPOINT ["executable", "param-1", "param-2" ]
+ENTRYPOINT executable  param-1 param-2
+If both ENTRYPOINT and CMD Exists then ENTRYPOINT will be executable and CMD will be arguments
+
+CMD
+Syntax
+CMD ["executable", "param-1", "param-2" ]
+CMD executable  param-1 param-2
+CMD param-1 param-2
+
+
+
+
+
+EXAMPLE OF Dockerfile creation
+1)
+
+FROM ubuntu  
+RUN apt-get update && apt-get install openjdk-8-jdk wget -y
+RUN wget https://referenceappkhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+EXPOSE 8080
+CMD java -jar spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+2)
+FROM openjdk:8
+RUN wget https://referenceappkhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java",  "-jar",  "spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+
+
+
+
+
+docker container run in three ways
+intactive mode
+detached mode
+detached mode with portfarwording
+
+naming convention of dockerimage
+imagename:version
+
+
+
+
+
+
+
+
+	commends
+docker --version
+docker --help
+docker image --help
+docker container --help ...etc
+docker container run -it ubuntu /bin/bash
+docker image build -t nameofthetage dockerfilepath
+docker image ls
+docker container run -d -P imagename(tage)
+docker image pull jenkins
+docker image build -t <imagetag> -f <path to Dockerfile>
+docker image build -t <imagetage> <path or url>
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+        dockerfile instructions
+
+FROM
+
+RUN
+
+MAINTAINER
+
+EXPOSE
+
+ENTRYPOINT
+
+CMD
+
+LABEL
+
+ADD
+
+VOLUME
+
+WORKDIR
+
+USER
+
+ARG
+
+ONBUILD
+
+STOPSIGNAL
+
+HEALTHCHECK
+
+SHELL
+
+ENV
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
